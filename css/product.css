@@ -1,0 +1,154 @@
+.product {
+    background: #fff;
+    padding-top: 65px;
+    padding-bottom: 50px;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 60px;
+    padding-top: 65px;
+
+}
+.product .titlepage {
+    padding-bottom: 20px;
+    text-align: center;
+}
+
+.product_box_main {
+    padding: 10px;
+    width: 300px;
+    transition: 0.5s;
+}
+.product_box_main:hover{
+    scale: 1.025;
+}
+
+.product_box {
+    margin-top: 20px;
+    background: #fff;
+    max-width: 400px;
+    width: 100%;    
+    margin-bottom: 20px;
+    border-radius: 5px;
+    overflow: hidden;
+    height: 420px; /* Fixed height for all boxes */
+    transition: 0.3s;
+}
+.product_box:hover{
+    box-shadow: 0 0 15px rgba(2, 3, 8, 0.14);
+}
+
+  
+/* Initial state for product boxes */
+.product_box_main {
+    opacity: 0;
+    transform: translateY(50px);
+    scale: 0.5;
+    transition: opacity 0.5s ease, transform 1s ease, scale 1s ease;
+  }
+  
+  /* When the product boxes are visible in the viewport */
+.product_box_main.visible {
+    opacity: 1;
+    transform: translateY(0);
+    scale: 1;
+}
+  
+@keyframes fadeup {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);  /* Start 50px below */
+    scale: 0.5;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);  /* End in normal position */
+    scale: 1;
+  }
+}
+  
+  
+
+.product_box figure {
+    margin: 33px 0 0 0; /* Margin from top */
+    text-align: center;
+}
+
+.product_box figure img {
+    width: 100%;
+    height: 180px; /* Fixed height for images */
+    object-fit: contain; /* Object-fit contain */
+    border-radius: 5px;
+}
+
+.veget {
+    padding: 20px;
+    border-radius: 0 0 5px 5px;
+    margin-top: 0;
+    background: #fff;
+    height: auto;
+    text-align: center;
+}
+
+.product_box h3 {
+    color: #292928;
+    font-size: 20px;
+    line-height: 24px;
+    font-weight: bold;
+    padding-bottom: 10px;
+}
+
+.product_box p {
+    font-size: 14px;
+    line-height: 20px;
+}
+
+
+.col-md-3 {
+    width: 25%; /* Use 25% directly */
+    margin-left: 10px;
+    margin-right: 10px;
+    box-sizing: border-box;
+    max-width: 300px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.col-md-3:first-child{
+    margin-left:0;
+}
+.col-md-3:last-child{
+    margin-right:0;
+}
+
+@keyframes fadeup {
+    0% {
+      opacity: 0;
+      transform: translateY(50px);  /* Start 50px below */
+      scale: 0.5;
+    }
+    100% {
+      opacity: 1;
+      scale: 1;
+      transform: translateY(0);  /* End in normal position */
+    }
+  }
+
+/* Responsive CSS */
+@media (max-width: 1024px) {
+    .col-md-3 {
+        width: calc(33.33% - 20px);
+    }
+}
+
+@media (max-width: 768px) {
+    .col-md-3 {
+        width: calc(50% - 20px);
+    }
+}
+
+@media (max-width: 480px) {
+    .col-md-3 {
+        width: calc(100% - 20px);
+    }
+}
