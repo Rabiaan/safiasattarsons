@@ -1,0 +1,14 @@
+{
+  "name": "safia-sattar-sons-build",
+  "private": true,
+  "type": "module",
+  "description": "Static site generator for the redesigned Safia Sattar Sons website",
+  "scripts": {
+    "build": "node build.mjs && node validate.mjs && node copycheck.mjs",
+    "validate": "node validate.mjs",
+    "copycheck": "node copycheck.mjs",
+    "browsercheck": "node browsercheck.mjs",
+    "shots": "node shots.mjs",
+    "fixencoding": "node fixencoding.mjs pages.mjs theme.mjs data.mjs"
+  }
+}
