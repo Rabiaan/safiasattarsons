@@ -172,6 +172,18 @@
 .p-card .p-cta { transition: background-color .25s ease, color .25s ease; }
 .p-card:hover .p-cta { background-color: #feb957; color: #000; }
 
+/* volume growth card */
+.volume-card { transition: transform .35s cubic-bezier(.22,1,.36,1), box-shadow .35s ease, border-color .35s ease; }
+.volume-card:hover { transform: translateY(-6px); box-shadow: 0 12px 32px -8px rgba(33,49,65,.18); border-color: rgba(218,154,58,.55); }
+.volume-bars > div { transform-origin: bottom; }
+.volume-bars.is-in > div { animation: bar-grow .9s cubic-bezier(.22,1,.36,1) both; }
+.volume-bars.is-in > div:nth-child(2) { animation-delay: .07s; }
+.volume-bars.is-in > div:nth-child(3) { animation-delay: .14s; }
+.volume-bars.is-in > div:nth-child(4) { animation-delay: .21s; }
+.volume-bars.is-in > div:nth-child(5) { animation-delay: .28s; }
+.volume-bars.is-in > div:nth-child(6) { animation-delay: .35s; }
+@keyframes bar-grow { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+
 /* filterable cards */
 [data-filter-item] { transition: opacity .28s ease, transform .28s ease; }
 [data-filter-item].is-hidden { display: none; }
@@ -197,6 +209,8 @@ summary::-webkit-details-marker { display: none; }
 @media (prefers-reduced-motion: reduce) {
   .reveal, .reveal.is-visible { opacity: 1 !important; transform: none !important; transition: none !important; }
   .animate-marquee { animation: none !important; }
+  .volume-bars > div { animation: none !important; }
+  .volume-card { transition: none !important; }
 }
 
 /* google translate: hide its widget + banner, the site has its own switcher */
@@ -455,12 +469,12 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Plus Jakarta Sans', ui-sans-serif, system
         <p class="text-body-md font-body-md text-on-surface-variant mb-8">SAFIA SATTAR SONS is dedicated to providing high-yield, pure rice varieties and refined cooking oils tailored for rigorous culinary standards across the GCC and international corridors.</p>
       </div>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <div class="bg-surface-container-lowest p-5 rounded-lg border border-outline-variant/20 flex flex-col justify-between">
+        <div class="volume-card bg-surface-container-lowest p-5 rounded-lg border border-outline-variant/20 flex flex-col justify-between">
           <div class="flex items-center justify-between mb-3">
             <span class="text-label-pill font-label-pill text-on-surface font-semibold">Volume Growth</span>
             <span class="w-6 h-6 rounded-full bg-secondary-fixed/50 flex items-center justify-center"><span class="material-symbols-outlined text-xs">bar_chart</span></span>
           </div>
-          <div class="flex items-end gap-1.5 h-16 pt-2">
+          <div class="volume-bars flex items-end gap-1.5 h-16 pt-2" data-volume-bars>
             <div class="flex-1 bg-surface-container-highest rounded-t h-[40%]"></div>
             <div class="flex-1 bg-surface-container-highest rounded-t h-[55%]"></div>
             <div class="flex-1 bg-surface-container-highest rounded-t h-[70%]"></div>
@@ -1502,6 +1516,19 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Plus Jakarta Sans', ui-sans-serif, system
 
     ScrollTrigger.refresh();
     window.addEventListener('load', function () { setTimeout(function () { ScrollTrigger.refresh(); }, 80); });
+  }
+
+  /* volume card bars grow when scrolled into view */
+  var volumeBars = document.querySelectorAll('[data-volume-bars]');
+  if (volumeBars.length && !reduceMotion) {
+    var barsIO = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        barsIO.unobserve(entry.target);
+        entry.target.classList.add('is-in');
+      });
+    }, { threshold: 0.4 });
+    volumeBars.forEach(function (el) { barsIO.observe(el); });
   }
   function initCounters() {
     var els = document.querySelectorAll('[data-count]');
