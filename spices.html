@@ -202,6 +202,7 @@ summary::-webkit-details-marker { display: none; }
 /* google translate: hide its widget + banner, the site has its own switcher */
 #google_translate_element { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .goog-te-banner-frame, .goog-te-balloon-frame, #goog-gt-tt, .goog-logo-link, .goog-te-gadget-icon, .goog-te-gadget-simple img { display: none !important; }
+.VIpgJd-ZVi9od-ORHb-OEVmcd { display: none !important; box-shadow: none !important; border-bottom: 0 !important; }
 body { top: 0 !important; }
 .goog-text-highlight { background: none !important; box-shadow: none !important; }
 
@@ -1163,6 +1164,10 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Plus Jakarta Sans', ui-sans-serif, system
   });
 
   /* ---------- language / google translate ---------- */
+  document.querySelectorAll('.material-symbols-outlined').forEach(function (el) {
+    el.classList.add('notranslate');
+    el.setAttribute('translate', 'no');
+  });
   var modal = document.getElementById('languageModal');
   var langLabel = document.getElementById('langLabel');
   function readLangCookie() {
